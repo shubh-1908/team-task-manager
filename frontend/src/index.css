@@ -19,10 +19,36 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
+  background: #07070f;
   color: var(--text);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 10%, rgba(108,99,255,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 20%, rgba(255,101,132,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 90%, rgba(67,233,123,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(108,99,255,0.10) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(108,99,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,99,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
 }
 
 h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
@@ -35,8 +61,10 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
 /* Sidebar */
 .sidebar {
   width: 240px;
-  background: var(--bg2);
-  border-right: 1px solid var(--border);
+  background: rgba(19,19,26,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(42,42,56,0.6);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -132,6 +160,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
   flex: 1;
   padding: 32px;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 .page-header {
@@ -146,8 +176,10 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
 
 /* Cards */
 .card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: rgba(22,22,31,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42,42,56,0.6);
   border-radius: var(--radius);
   padding: 20px;
 }
@@ -161,12 +193,20 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
 }
 
 .stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: rgba(22,22,31,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42,42,56,0.6);
   border-radius: var(--radius);
   padding: 20px;
   position: relative;
   overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(108,99,255,0.15);
 }
 
 .stat-card::before {
@@ -313,28 +353,48 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 .auth-page {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
-  background: var(--bg);
+  background: transparent;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .auth-page::before {
   content: '';
   position: absolute;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
-  top: -100px; right: -100px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(108,99,255,0.2) 0%, transparent 70%);
+  top: -150px; right: -150px;
   border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.auth-page::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,101,132,0.12) 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
 }
 
 .auth-box {
-  background: var(--bg2);
-  border: 1px solid var(--border);
+  background: rgba(19,19,26,0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(108,99,255,0.2);
   border-radius: var(--radius);
   padding: 40px;
   width: 100%; max-width: 420px;
   position: relative;
   z-index: 1;
+  box-shadow: 0 0 60px rgba(108,99,255,0.1), 0 24px 48px rgba(0,0,0,0.4);
 }
 
 .auth-title {
