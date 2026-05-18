@@ -116,7 +116,7 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
 }
 
 .user-info { flex: 1; min-width: 0; }
-.user-info .name { font-size: 13px; font-weight: 600; truncate; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-info .name { font-size: 13px; font-weight: 600; white-space: nowrap;; overflow: hidden; text-overflow: ellipsis; }
 .user-info .role { font-size: 11px; color: var(--text3); text-transform: capitalize; }
 
 .logout-btn {
